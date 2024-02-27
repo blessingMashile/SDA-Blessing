@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Health Check Message Specification
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    HealthCheckMessageFields:
+      type: object
+      properties:
+        ProtocolDependentHeader:
+          type: string
+          description: >
+            Protocol uses this header on all transmitted formats. This field contains
+            one or more protocol characters and precedes the message text. This
+            header typically includes the start-of-text (STX) character.
+        RecordFormat:
+          type: string
+          description: >
+            This one character field identifies this message as a Spark ATM formatted
+            POS message.
+          enum:
+            - H
+        ApplicationType:
+          type: string
+          description: >
+            This one character field must contain an ASCII zero.
+          enum:
+            - "0"
+        MessageDelimiter:
+          type: string
+          description: >
+            This message delimiter separates the format and application type
+            designators from the body of the message. The message delimiter is
+            defined as a period.
+          enum:
+            - "."
+        BankIDNumber:
+          type: string
+          description: >
+            This fixed length field contains the alphanumeric, host processor
+            assigned. Bank Identification Number (BIN).
+        TerminalID:
+          type: string
+          description: >
+            This fixed length field contains the 8 character Terminal ID assigned by
+            the host processor. This field is used to identify a specific terminal. This
+            field must be unique across all terminals within a single host processor.
+        ResponseType:
+          type: string
+          description: >
+            This two character field identifies the type of response. A Health Check
+            Message contains an H0 in this field.
+          enum:
+            - "H0"
+        ProtocolDependentTrailer:
+          type: string
+          description: >
+            This variable-length Protocol Dependent Trailer field indicates the end of
+            the message.
+      required:
+        - RecordFormat
+        - ApplicationType
+        - MessageDelimiter
+        - BankIDNumber
+        - TerminalID
+        - ResponseType
+        - ProtocolDependentTrailer
+      additionalProperties: false
+
+    HealthCheckConfirmMessageFields:
+      type: object
+      properties:
+        ProtocolDependentHeader:
+          type: string
+          description: >
+            Protocol uses this header on all transmitted formats. This field contains
+            one or more protocol characters and precedes the message text. This
+            header typically includes the start-of-text (STX) character.
+        RecordFormat:
+          type: string
+          description: >
+            This one character field identifies this message as a Spark ATM formatted
+            POS message.
+          enum:
+            - H
+        ApplicationType:
+          type: string
+          description: >
+            This one character field must contain an ASCII zero.
+          enum:
+            - "0"
+        MessageDelimiter:
+          type: string
+          description: >
+            This message delimiter separates the format and application type
+            designators from the body of the message. The message delimiter is
+            defined as a period.
+          enum:
+            - "."
+        BankIDNumber:
+          type: string
+          description: >
+            This fixed length field contains the alphanumeric, host processor
+            assigned. Bank Identification Number (BIN).
+        TerminalID:
+          type: string
+          description: >
+            This fixed length field contains the 8 character Terminal ID assigned by
+            the host processor. This field is used to identify a specific terminal. This
+            field must be unique across all terminals within a single host processor.
+        ResponseType:
+          type: string
+          description: >
+            This two characters field identifies the type of response. A Health Check
+            Confirm Message contains an H0 in this field.
+          enum:
+            - "H0"
+        ProtocolDependentTrailer:
+          type: string
+          description: >
+            This variable-length Protocol Dependent Trailer field indicates the end
+            of the message.
+      required:
+        - RecordFormat
+        - ApplicationType
+        - MessageDelimiter
+        - BankIDNumber
+        - TerminalID
+        - ResponseType
+        - ProtocolDependentTrailer
+      additionalProperties: false
